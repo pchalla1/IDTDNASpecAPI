@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProductionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SPEC_DELIVERY">
+          <Key>
+            <PropertyRef Name="SPEC_DELIVERY_ID" />
+          </Key>
+          <Property Name="SPEC_DELIVERY_ID" Type="int" Nullable="false" />
+          <Property Name="CREATE_DTM" Type="datetime" Nullable="false" />
+          <Property Name="SPEC_STATE_ID" Type="int" Nullable="false" />
+          <Property Name="GUAR_COMPLETE_DTM" Type="datetime" />
+          <Property Name="SPEC_ORDER_ID" Type="int" Nullable="false" />
+          <Property Name="PARENT_SPEC_DELIVERY_ID" Type="int" />
+          <Property Name="PROCESS_PRIORITY" Type="int" Nullable="false" />
+          <Property Name="REF_ID" Type="int" />
+          <Property Name="DECLARED_VALUE" Type="money" />
+          <Property Name="VERSION_NBR" Type="int" Nullable="false" />
+          <Property Name="VERSION_DTM" Type="datetime" Nullable="false" />
+          <Property Name="PROJECT_NAME" Type="varchar" MaxLength="80" />
+          <Property Name="REMAKE" Type="bit" />
+          <Property Name="EXTERNAL_REF_ID" Type="varchar" MaxLength="50" />
+          <Property Name="DIRECTED_TYPE" Type="int" />
+          <Property Name="DO_SHIP" Type="bit" />
+          <Property Name="DECLARED_VALUE_NATURAL" Type="money" />
+        </EntityType>
+        <EntityType Name="SPEC_OLIGO">
+          <Key>
+            <PropertyRef Name="SPEC_OLIGO_ID" />
+          </Key>
+          <Property Name="SPEC_OLIGO_ID" Type="int" Nullable="false" />
+          <Property Name="CREATE_DTM" Type="datetime" Nullable="false" />
+          <Property Name="SPEC_STATE_ID" Type="int" Nullable="false" />
+          <Property Name="OLIGO_TYPE" Type="int" Nullable="false" />
+          <Property Name="WORKFLOW_PATH_ID" Type="int" Nullable="false" />
+          <Property Name="BRANCH_LOCATION_ID" Type="int" Nullable="false" />
+          <Property Name="PROD_ID" Type="int" />
+          <Property Name="REF_ID" Type="int" />
+          <Property Name="SCALE_ID" Type="int" />
+          <Property Name="SPEC_DELIVERY_ID" Type="int" Nullable="false" />
+          <Property Name="SPEC_ORDER_ID" Type="int" Nullable="false" />
+          <Property Name="GUAR_MIN_SHIP_VAL" Type="float" Nullable="false" />
+          <Property Name="GUAR_MIN_SHIP_UOM_ID" Type="int" Nullable="false" />
+          <Property Name="GUAR_MIN_SYNTH_VAL" Type="float" Nullable="false" />
+          <Property Name="GUAR_MIN_SYNTH_UOM_ID" Type="int" Nullable="false" />
+          <Property Name="GUAR_MAX_SYNTH_VAL" Type="float" Nullable="false" />
+          <Property Name="GUAR_MAX_SYNTH_UOM_ID" Type="int" Nullable="false" />
+          <Property Name="PURITY_GUAR_PCT" Type="float" />
+          <Property Name="PURITY_EXPL_ID" Type="int" Nullable="false" />
+          <Property Name="PURITY_GUAR_USABLE" Type="bit" Nullable="false" />
+          <Property Name="YIELD_EXPL_ID" Type="int" />
+          <Property Name="PROCESS_PRIORITY" Type="int" Nullable="false" />
+          <Property Name="PURIFICATION_ID" Type="int" />
+          <Property Name="PARENT_SPEC_OLIGO_ID" Type="int" />
+          <Property Name="VERSION_NBR" Type="int" Nullable="false" />
+          <Property Name="VERSION_DTM" Type="datetime" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="300" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="255" />
+          <Property Name="SEQUENCE" Type="varchar(max)" />
+          <Property Name="SEQUENCE_DESCRIPTION" Type="varchar" MaxLength="1000" />
+          <Property Name="SEQUENCE_CODON" Type="varchar(max)" />
+          <Property Name="EXTERNAL_REF_ID" Type="varchar" MaxLength="50" />
+          <Property Name="DIRECTED_TYPE" Type="int" />
+          <Property Name="IS_SYNTHESIS_REQUIRED" Type="bit" />
+          <Property Name="QUANTITY" Type="int" />
+        </EntityType>
+        <Association Name="FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID">
+          <End Role="SPEC_DELIVERY" Type="Self.SPEC_DELIVERY" Multiplicity="1" />
+          <End Role="SPEC_OLIGO" Type="Self.SPEC_OLIGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPEC_DELIVERY">
+              <PropertyRef Name="SPEC_DELIVERY_ID" />
+            </Principal>
+            <Dependent Role="SPEC_OLIGO">
+              <PropertyRef Name="SPEC_DELIVERY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProductionModelStoreContainer">
+          <EntitySet Name="SPEC_DELIVERY" EntityType="Self.SPEC_DELIVERY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SPEC_OLIGO" EntityType="Self.SPEC_OLIGO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID" Association="Self.FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID">
+            <End Role="SPEC_DELIVERY" EntitySet="SPEC_DELIVERY" />
+            <End Role="SPEC_OLIGO" EntitySet="SPEC_OLIGO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProductionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SPEC_DELIVERY">
+          <Key>
+            <PropertyRef Name="SPEC_DELIVERY_ID" />
+          </Key>
+          <Property Name="SPEC_DELIVERY_ID" Type="Int32" Nullable="false" />
+          <Property Name="CREATE_DTM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SPEC_STATE_ID" Type="Int32" Nullable="false" />
+          <Property Name="GUAR_COMPLETE_DTM" Type="DateTime" Precision="3" />
+          <Property Name="SPEC_ORDER_ID" Type="Int32" Nullable="false" />
+          <Property Name="PARENT_SPEC_DELIVERY_ID" Type="Int32" />
+          <Property Name="PROCESS_PRIORITY" Type="Int32" Nullable="false" />
+          <Property Name="REF_ID" Type="Int32" />
+          <Property Name="DECLARED_VALUE" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="VERSION_NBR" Type="Int32" Nullable="false" />
+          <Property Name="VERSION_DTM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PROJECT_NAME" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="REMAKE" Type="Boolean" />
+          <Property Name="EXTERNAL_REF_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECTED_TYPE" Type="Int32" />
+          <Property Name="DO_SHIP" Type="Boolean" />
+          <Property Name="DECLARED_VALUE_NATURAL" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="SPEC_OLIGO" Relationship="Self.FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID" FromRole="SPEC_DELIVERY" ToRole="SPEC_OLIGO" />
+        </EntityType>
+        <EntityType Name="SPEC_OLIGO">
+          <Key>
+            <PropertyRef Name="SPEC_OLIGO_ID" />
+          </Key>
+          <Property Name="SPEC_OLIGO_ID" Type="Int32" Nullable="false" />
+          <Property Name="CREATE_DTM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SPEC_STATE_ID" Type="Int32" Nullable="false" />
+          <Property Name="OLIGO_TYPE" Type="Int32" Nullable="false" />
+          <Property Name="WORKFLOW_PATH_ID" Type="Int32" Nullable="false" />
+          <Property Name="BRANCH_LOCATION_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROD_ID" Type="Int32" />
+          <Property Name="REF_ID" Type="Int32" />
+          <Property Name="SCALE_ID" Type="Int32" />
+          <Property Name="SPEC_DELIVERY_ID" Type="Int32" Nullable="false" />
+          <Property Name="SPEC_ORDER_ID" Type="Int32" Nullable="false" />
+          <Property Name="GUAR_MIN_SHIP_VAL" Type="Double" Nullable="false" />
+          <Property Name="GUAR_MIN_SHIP_UOM_ID" Type="Int32" Nullable="false" />
+          <Property Name="GUAR_MIN_SYNTH_VAL" Type="Double" Nullable="false" />
+          <Property Name="GUAR_MIN_SYNTH_UOM_ID" Type="Int32" Nullable="false" />
+          <Property Name="GUAR_MAX_SYNTH_VAL" Type="Double" Nullable="false" />
+          <Property Name="GUAR_MAX_SYNTH_UOM_ID" Type="Int32" Nullable="false" />
+          <Property Name="PURITY_GUAR_PCT" Type="Double" />
+          <Property Name="PURITY_EXPL_ID" Type="Int32" Nullable="false" />
+          <Property Name="PURITY_GUAR_USABLE" Type="Boolean" Nullable="false" />
+          <Property Name="YIELD_EXPL_ID" Type="Int32" />
+          <Property Name="PROCESS_PRIORITY" Type="Int32" Nullable="false" />
+          <Property Name="PURIFICATION_ID" Type="Int32" />
+          <Property Name="PARENT_SPEC_OLIGO_ID" Type="Int32" />
+          <Property Name="VERSION_NBR" Type="Int32" Nullable="false" />
+          <Property Name="VERSION_DTM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NAME" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SEQUENCE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SEQUENCE_DESCRIPTION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SEQUENCE_CODON" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EXTERNAL_REF_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECTED_TYPE" Type="Int32" />
+          <Property Name="IS_SYNTHESIS_REQUIRED" Type="Boolean" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <NavigationProperty Name="SPEC_DELIVERY" Relationship="Self.FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID" FromRole="SPEC_OLIGO" ToRole="SPEC_DELIVERY" />
+        </EntityType>
+        <Association Name="FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID">
+          <End Role="SPEC_DELIVERY" Type="Self.SPEC_DELIVERY" Multiplicity="1" />
+          <End Role="SPEC_OLIGO" Type="Self.SPEC_OLIGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPEC_DELIVERY">
+              <PropertyRef Name="SPEC_DELIVERY_ID" />
+            </Principal>
+            <Dependent Role="SPEC_OLIGO">
+              <PropertyRef Name="SPEC_DELIVERY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IdtDnaDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SPEC_DELIVERY" EntityType="Self.SPEC_DELIVERY" />
+          <EntitySet Name="SPEC_OLIGO" EntityType="Self.SPEC_OLIGO" />
+          <AssociationSet Name="FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID" Association="Self.FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID">
+            <End Role="SPEC_DELIVERY" EntitySet="SPEC_DELIVERY" />
+            <End Role="SPEC_OLIGO" EntitySet="SPEC_OLIGO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProductionModelStoreContainer" CdmEntityContainer="IdtDnaDataEntities">
+          <EntitySetMapping Name="SPEC_DELIVERY">
+            <EntityTypeMapping TypeName="ProductionModel.SPEC_DELIVERY">
+              <MappingFragment StoreEntitySet="SPEC_DELIVERY">
+                <ScalarProperty Name="SPEC_DELIVERY_ID" ColumnName="SPEC_DELIVERY_ID" />
+                <ScalarProperty Name="CREATE_DTM" ColumnName="CREATE_DTM" />
+                <ScalarProperty Name="SPEC_STATE_ID" ColumnName="SPEC_STATE_ID" />
+                <ScalarProperty Name="GUAR_COMPLETE_DTM" ColumnName="GUAR_COMPLETE_DTM" />
+                <ScalarProperty Name="SPEC_ORDER_ID" ColumnName="SPEC_ORDER_ID" />
+                <ScalarProperty Name="PARENT_SPEC_DELIVERY_ID" ColumnName="PARENT_SPEC_DELIVERY_ID" />
+                <ScalarProperty Name="PROCESS_PRIORITY" ColumnName="PROCESS_PRIORITY" />
+                <ScalarProperty Name="REF_ID" ColumnName="REF_ID" />
+                <ScalarProperty Name="DECLARED_VALUE" ColumnName="DECLARED_VALUE" />
+                <ScalarProperty Name="VERSION_NBR" ColumnName="VERSION_NBR" />
+                <ScalarProperty Name="VERSION_DTM" ColumnName="VERSION_DTM" />
+                <ScalarProperty Name="PROJECT_NAME" ColumnName="PROJECT_NAME" />
+                <ScalarProperty Name="REMAKE" ColumnName="REMAKE" />
+                <ScalarProperty Name="EXTERNAL_REF_ID" ColumnName="EXTERNAL_REF_ID" />
+                <ScalarProperty Name="DIRECTED_TYPE" ColumnName="DIRECTED_TYPE" />
+                <ScalarProperty Name="DO_SHIP" ColumnName="DO_SHIP" />
+                <ScalarProperty Name="DECLARED_VALUE_NATURAL" ColumnName="DECLARED_VALUE_NATURAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPEC_OLIGO">
+            <EntityTypeMapping TypeName="ProductionModel.SPEC_OLIGO">
+              <MappingFragment StoreEntitySet="SPEC_OLIGO">
+                <ScalarProperty Name="SPEC_OLIGO_ID" ColumnName="SPEC_OLIGO_ID" />
+                <ScalarProperty Name="CREATE_DTM" ColumnName="CREATE_DTM" />
+                <ScalarProperty Name="SPEC_STATE_ID" ColumnName="SPEC_STATE_ID" />
+                <ScalarProperty Name="OLIGO_TYPE" ColumnName="OLIGO_TYPE" />
+                <ScalarProperty Name="WORKFLOW_PATH_ID" ColumnName="WORKFLOW_PATH_ID" />
+                <ScalarProperty Name="BRANCH_LOCATION_ID" ColumnName="BRANCH_LOCATION_ID" />
+                <ScalarProperty Name="PROD_ID" ColumnName="PROD_ID" />
+                <ScalarProperty Name="REF_ID" ColumnName="REF_ID" />
+                <ScalarProperty Name="SCALE_ID" ColumnName="SCALE_ID" />
+                <ScalarProperty Name="SPEC_DELIVERY_ID" ColumnName="SPEC_DELIVERY_ID" />
+                <ScalarProperty Name="SPEC_ORDER_ID" ColumnName="SPEC_ORDER_ID" />
+                <ScalarProperty Name="GUAR_MIN_SHIP_VAL" ColumnName="GUAR_MIN_SHIP_VAL" />
+                <ScalarProperty Name="GUAR_MIN_SHIP_UOM_ID" ColumnName="GUAR_MIN_SHIP_UOM_ID" />
+                <ScalarProperty Name="GUAR_MIN_SYNTH_VAL" ColumnName="GUAR_MIN_SYNTH_VAL" />
+                <ScalarProperty Name="GUAR_MIN_SYNTH_UOM_ID" ColumnName="GUAR_MIN_SYNTH_UOM_ID" />
+                <ScalarProperty Name="GUAR_MAX_SYNTH_VAL" ColumnName="GUAR_MAX_SYNTH_VAL" />
+                <ScalarProperty Name="GUAR_MAX_SYNTH_UOM_ID" ColumnName="GUAR_MAX_SYNTH_UOM_ID" />
+                <ScalarProperty Name="PURITY_GUAR_PCT" ColumnName="PURITY_GUAR_PCT" />
+                <ScalarProperty Name="PURITY_EXPL_ID" ColumnName="PURITY_EXPL_ID" />
+                <ScalarProperty Name="PURITY_GUAR_USABLE" ColumnName="PURITY_GUAR_USABLE" />
+                <ScalarProperty Name="YIELD_EXPL_ID" ColumnName="YIELD_EXPL_ID" />
+                <ScalarProperty Name="PROCESS_PRIORITY" ColumnName="PROCESS_PRIORITY" />
+                <ScalarProperty Name="PURIFICATION_ID" ColumnName="PURIFICATION_ID" />
+                <ScalarProperty Name="PARENT_SPEC_OLIGO_ID" ColumnName="PARENT_SPEC_OLIGO_ID" />
+                <ScalarProperty Name="VERSION_NBR" ColumnName="VERSION_NBR" />
+                <ScalarProperty Name="VERSION_DTM" ColumnName="VERSION_DTM" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="SEQUENCE" ColumnName="SEQUENCE" />
+                <ScalarProperty Name="SEQUENCE_DESCRIPTION" ColumnName="SEQUENCE_DESCRIPTION" />
+                <ScalarProperty Name="SEQUENCE_CODON" ColumnName="SEQUENCE_CODON" />
+                <ScalarProperty Name="EXTERNAL_REF_ID" ColumnName="EXTERNAL_REF_ID" />
+                <ScalarProperty Name="DIRECTED_TYPE" ColumnName="DIRECTED_TYPE" />
+                <ScalarProperty Name="IS_SYNTHESIS_REQUIRED" ColumnName="IS_SYNTHESIS_REQUIRED" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

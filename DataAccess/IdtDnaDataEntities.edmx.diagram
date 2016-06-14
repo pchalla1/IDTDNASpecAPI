@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="23a8d71e71e343e9aa23a360bc55313e" Name="Diagram1">
+        <EntityTypeShape EntityType="ProductionModel.SPEC_DELIVERY" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductionModel.SPEC_OLIGO" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="ProductionModel.FK_SPEC_OLIGO_SPEC_DELIVERY_ID_SPEC_DELIVERY_SPEC_DELIVERY_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
